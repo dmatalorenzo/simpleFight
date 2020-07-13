@@ -1,11 +1,19 @@
+import options
 import champions
 import fight
+
+
+champions.addChampion("Irelia", 150, 30, 5, 0.4)
+champions.addChampion("Renekton", 200, 20, 10, 0.5)
+champions.showChampionsList()
 
 print("Welcome to Simple Fight")
 print("Choose an option to start:")
 
 print("1. Champions List")
+options.championList()
 print("2. Champion Info")
+options.championInfo()
 print("3. Fight")
 print("4. Manage champions")
 
@@ -17,12 +25,11 @@ print("4. Remove champion")
 
 
 #Add champion to the list
-champions.addChampion("Irelia", 150, 30, 5, 0.4)
-#champions.addChampion("Renekton", 200, 20, 10, 0.5)
+
 
 #Show the champions listy
-print("Select a champion from the list")
-champions.showChampionsList()
+#print("Select a champion from the list")
+#champions.showChampionsList()
 
 #Show champions information
 #champions.championInfo("Irelia")

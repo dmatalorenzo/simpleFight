@@ -1,4 +1,6 @@
 import champions
+from tinydb import TinyDB
+from tinydb import Query
 
 #Champions list
 def championList():
@@ -8,16 +10,17 @@ def championList():
 def championInfo():
 
     while True:
-        seeList = input("Do you wanna see the champions list? (Y/N)")
-        if seeList =="Y":
+        seeList = input("Do you wanna see the champions list? (Y/N) ")
+        print(seeList)
+        if seeList == "Y":
             champions.showChampionsList()
             break
         elif seeList == "N":
             break
         else:
-            seeList = input("Introduce a correct value")
+            seeList = input("Introduce a correct value: ")
 
-    champion = input("Introduce the champion name")
+    champion = input("Introduce the champion name: ")
 
 #Fight
 #def fight():
@@ -25,10 +28,8 @@ def championInfo():
 #Manage Champion
 #def manageChampion():
 
-def switchOptions(argument):
-    switcher = {
-
-    }
-    print switcher.get(argument, "Invalid option")
-
-championInfo()
+#def switchOptions(argument):
+#    switcher = {
+#
+#    }
+#    print switcher.get(argument, "Invalid option")

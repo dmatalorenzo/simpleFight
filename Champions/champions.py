@@ -17,6 +17,7 @@ class Champion:
 #Show a list with the names of the champions in the db
 def showChampionsList():
     #Get the name of any champion into our champions table
+    print("This is the champions list")
     for x in getChampionList():
         #print champions names
         print( "--> " + x)
@@ -57,10 +58,10 @@ def selectChampion(champ):
 def championInfo(champion):
     selectedChampion = getChampion(champion)
     print(selectedChampion.name + ' stats: ')
-    print'--> Life:' ,selectedChampion.life
-    print'--> Attack:' ,selectedChampion.attack
-    print'--> Defence:' ,selectedChampion.defence
-    print'--> Speed:' ,selectedChampion.speed
+    print('--> Life:' + selectedChampion.life)
+    print('--> Attack:' + selectedChampion.attack)
+    print('--> Defence:' + selectedChampion.defence)
+    print('--> Speed:' + selectedChampion.speed)
 
 def allChampionsInfo():
     for x in getChampionList():
