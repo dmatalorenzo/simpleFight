@@ -1,4 +1,6 @@
 import threading
+import dialogs
+import champions
 from threading import Condition
 import time
 
@@ -33,9 +35,9 @@ def fight(champ1, champ2):
 
 def hit(champ1, champ2):
     damage = champ1.attack-champ2.defence
-    champ2.life -= damage
+    champ2.life = champ2.life - damage
     if champ2.life > 0:
-        print(champ1.name, "hit", damage,  "to",  champ2.name, "(", champ2.life, ")")
+        dialogs.printHit(champ1, champ2, damage)
     time.sleep(champ1.speed)
 
 def alive(champ):
@@ -55,3 +57,19 @@ def winner(champ1, champ2):
         return champ1
     else:
         return champ2
+
+def chooseFighters():
+    print("Choose your champions to fight." )
+    print("Champion 1: ")
+    champ1 = input()
+    if not champions.championExist(champ1):
+        print("champion not valid")
+        return 0
+    champion1 = champions.selectChampion(champ1)
+    print("Champion 2: ")
+    champ2 = input()
+    if not champions.championExist(champ2):
+        print("champion not valid")
+        return 0
+    champion2 = champions.selectChampion(champ2)
+    battle(champion1, champion2)
