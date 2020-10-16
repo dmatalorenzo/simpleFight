@@ -1,1 +1,1 @@
-{"_default": {}, "champions": {}}
+{"_default": {}, "champions": {"1": {"name": "Irelia", "life": 150, "attack": 30, "defence": 5, "speed": 0.4}, "2": {"name": "Renekton", "life": 200, "attack": 20, "defence": 10, "speed": 0.5}}}

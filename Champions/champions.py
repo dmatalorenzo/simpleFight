@@ -1,4 +1,6 @@
 import fight
+import options
+import dialogs
 from tinydb import TinyDB
 from tinydb import Query
 
@@ -14,24 +16,47 @@ class Champion:
         self.defence = defence
         self.speed=speed
 
-#Show a list with the names of the champions in the db
 def showChampionsList():
-    #Get the name of any champion into our champions table
-    print("This is the champions list")
-    for x in getChampionList():
-        #print champions names
-        print( "--> " + x)
+    for championName in getChampionList():
+        print( "--> " + championName)
+    dialogs.endline()
 
-#Add a champion to the database
-def addChampion(name, life, attack, defence, speed):
-    #if we find a champion whith the same name into the db
-    if tableChampions.search(User.name == name):
-        #we output a message advicing that the champion is already created
+def getChampion(champ):
+    champ = tableChampions.get(User.name == champ)
+    selectedChamp = Champion(champ['name'],champ['life'], champ['attack'], champ['defence'], champ['speed'])
+    return selectedChamp
+
+def getChampionList():
+    return [r['name'] for r in tableChampions]
+
+def selectChampion(champ):
+    champion = getChampion(champ)
+    print("El campeon seleccionado es: " + champion.name)
+    return champion
+
+def championInfo(champion):
+    selectedChampion = getChampion(champion)
+    dialogs.championInfo(selectedChampion)
+
+def allChampionsInfo():
+    for x in getChampionList():
+        championInfo(x)
+
+def addChampion():
+    print(' + Champions name: ')
+    name = input()
+    if championExist(name):
         print(name + ' is already added to the champions list.')
-        #print('To check the champions list try: championsList')
-    #if the champion is not inte the db
     else:
-        #the champion is inserted into the db
+        print(' + Life Stat:')
+        life = input()
+        print(' + Attack Stat:')
+        attack = input()
+        print(' + Defence Stat:')
+        defence = input()
+        print(' + Speed Stat:')
+        speed = input()
+
         tableChampions.insert(
             {
               "name": name,
@@ -43,33 +68,15 @@ def addChampion(name, life, attack, defence, speed):
         )
         print("Champion added: " + name)
 
-def getChampion(champ):
-    champ = tableChampions.get(User.name == champ)
-    selectedChamp = Champion(champ['name'],champ['life'], champ['attack'], champ['defence'], champ['speed'])
-    return selectedChamp
-
-def getChampionList():
-    return [r['name'] for r in tableChampions]
-
-def selectChampion(champ):
-    print("El campeon seleccionado es: " + getChampion(selectedChamp.name))
-    return selectedChamp
-
-def championInfo(champion):
-    selectedChampion = getChampion(champion)
-    print(selectedChampion.name + ' stats: ')
-    print('--> Life:' + selectedChampion.life)
-    print('--> Attack:' + selectedChampion.attack)
-    print('--> Defence:' + selectedChampion.defence)
-    print('--> Speed:' + selectedChampion.speed)
-
-def allChampionsInfo():
-    for x in getChampionList():
-        championInfo(x)
-
 def updateChampion(champion, stat, value):
     tableChampions.update({stat:value}, User.name == champion)
     return getChampion(champion)
 
 def removeChampion(champion):
     tableChampions.remove(User.name == champion)
+
+def championExist(name):
+    if tableChampions.search(User.name == name):
+        return True
+    else:
+        return False
